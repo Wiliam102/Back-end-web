@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Springcliente",
+            "request": "launch",
+            "mainClass": "com.br.ifba.Springcliente",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"

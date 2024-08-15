@@ -1,9 +1,8 @@
 package com.br.ifba.infraestructure.usuario.controller;
 
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,9 +31,10 @@ public class UsuarioController {
      private final UsuarioService us;
     
    @GetMapping(path="/findall", produces="application/json")
-   public ResponseEntity<List<UserResponseDto>> findAll() {
-    return ResponseEntity.status(HttpStatus.OK)
-    .body(this.us.listAll().stream().map(UserResponseDto::new).collect(Collectors.toList()));
+   public ResponseEntity<Page<UserResponseDto>> findAll(Pageable pageable) {
+     Page<User> usersPage = us.findAll(pageable);
+     Page<UserResponseDto> dtoPage = usersPage.map(UserResponseDto::new);
+     return ResponseEntity.status(HttpStatus.OK).body(dtoPage);
 
    }
    

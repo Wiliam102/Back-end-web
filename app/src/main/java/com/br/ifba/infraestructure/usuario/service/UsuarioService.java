@@ -1,5 +1,7 @@
 package com.br.ifba.infraestructure.usuario.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,15 +11,14 @@ import com.br.ifba.infraestructure.usuario.repository.UsuarioRepositorio;
 
 import lombok.AllArgsConstructor;
 
-import java.util.List;
 @AllArgsConstructor
 @Service
 public class UsuarioService {
  private final UsuarioRepositorio ur;
 
  @Transactional
- public List<User> listAll(){
-    return ur.findAll();
+ public Page<User> findAll(Pageable pageable){
+    return ur.findAll(pageable);
 
  }
  @Transactional
